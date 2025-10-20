@@ -1,377 +1,19 @@
-// "use client"
+"use client";
 
-// import { useState, useMemo } from "react"
-// import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-// import { Button } from "@/components/ui/button"
-// import { Input } from "@/components/ui/input"
-// import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-// import { Star, MapPin, Award, Heart, Share2, MessageCircle, Filter } from "lucide-react"
-// import Link from "next/link"
-// import { mockExperts } from "@/lib/mock-data"
-// import AdvancedFilterSidebar from "@/components/appointment-booking"
-
-
-// interface FilterOptions {
-//   priceRange: [number, number]
-//   experience: string[]
-//   specialties: string[]
-//   availability: string[]
-//   freeTrial: boolean
-//   hasDiscount: boolean
-// }
-
-// export default function BrowsePage() {
-//   const [selectedCategory, setSelectedCategory] = useState<string>("all-categories")
-//   const [searchQuery, setSearchQuery] = useState("")
-//   const [sortBy, setSortBy] = useState("rating")
-//   const [minRating, setMinRating] = useState(0)
-//   const [favorites, setFavorites] = useState<string[]>([])
-//   const [showAdvancedFilters, setShowAdvancedFilters] = useState(false)
-//   const [filters, setFilters] = useState<FilterOptions>({
-//     priceRange: [0, 500000],
-//     experience: [],
-//     specialties: [],
-//     availability: [],
-//     freeTrial: false,
-//     hasDiscount: false,
-//   })
-
-//   const filteredExperts = useMemo(() => {
-//     let filtered = mockExperts
-
-//     if (selectedCategory !== "all-categories") {
-//       filtered = filtered.filter((expert) => expert.category === selectedCategory)
-//     }
-
-//     if (searchQuery) {
-//       filtered = filtered.filter(
-//         (expert) =>
-//           expert.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-//           expert.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-//           expert.specialties.some((s) => s.toLowerCase().includes(searchQuery.toLowerCase())),
-//       )
-//     }
-
-//     if (minRating > 0) {
-//       filtered = filtered.filter((expert) => expert.rating >= minRating)
-//     }
-
-//     // Price range filter
-//     filtered = filtered.filter(
-//       (expert) => expert.priceRange.min >= filters.priceRange[0] && expert.priceRange.max <= filters.priceRange[1],
-//     )
-
-//     // Experience filter
-//     if (filters.experience.length > 0) {
-//       filtered = filtered.filter((expert) => {
-//         const years = Number.parseInt(expert.experience.split(" ")[0])
-//         return filters.experience.some((exp) => {
-//           if (exp === "0-2 years") return years <= 2
-//           if (exp === "2-5 years") return years > 2 && years <= 5
-//           if (exp === "5-10 years") return years > 5 && years <= 10
-//           if (exp === "10+ years") return years > 10
-//           return false
-//         })
-//       })
-//     }
-
-//     // Specialties filter
-//     if (filters.specialties.length > 0) {
-//       filtered = filtered.filter((expert) => filters.specialties.some((spec) => expert.specialties.includes(spec)))
-//     }
-
-//     // Free trial filter
-//     if (filters.freeTrial) {
-//       filtered = filtered.filter((expert) => expert.freeTrial)
-//     }
-
-//     // Discount filter
-//     if (filters.hasDiscount) {
-//       filtered = filtered.filter((expert) => expert.discountCoupons.length > 0)
-//     }
-
-//     // Sort
-//     if (sortBy === "rating") {
-//       filtered.sort((a, b) => b.rating - a.rating)
-//     } else if (sortBy === "reviews") {
-//       filtered.sort((a, b) => b.reviews - a.reviews)
-//     } else if (sortBy === "price-low") {
-//       filtered.sort((a, b) => a.priceRange.min - b.priceRange.min)
-//     } else if (sortBy === "price-high") {
-//       filtered.sort((a, b) => b.priceRange.max - a.priceRange.max)
-//     }
-
-//     return filtered
-//   }, [selectedCategory, searchQuery, sortBy, minRating, filters])
-
-//   const toggleFavorite = (expertId: string) => {
-//     setFavorites((prev) => (prev.includes(expertId) ? prev.filter((id) => id !== expertId) : [...prev, expertId]))
-//   }
-
-//   const categories = [
-//     "wedding-designer",
-//     "casual-wear",
-//     "party-stylist",
-//     "office-stylist",
-//     "makeup-artist",
-//     "hair-stylist",
-//     "personal-shopper",
-//     "fashion-consultant",
-//   ]
-
-//   return (
-//     <main className="min-h-screen bg-background">
-//       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-//         {/* Header */}
-//         <div className="mb-8">
-//           <h1 className="text-4xl font-bold mb-2">Browse All Experts</h1>
-//           <p className="text-muted-foreground">Find the perfect professional for your needs</p>
-//         </div>
-
-//         <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
-//           {/* Sidebar - Advanced Filters */}
-//           <div className={`${showAdvancedFilters ? "block" : "hidden"} lg:block lg:col-span-1`}>
-//             <AdvancedFilterSidebar
-//               filters={filters}
-//               onFilterChange={setFilters}
-//               onClose={() => setShowAdvancedFilters(false)}
-//             />
-//           </div>
-
-//           {/* Main Content */}
-//           <div className="lg:col-span-3">
-//             {/* Quick Filters */}
-//             <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
-//               <div>
-//                 <label className="text-sm font-medium mb-2 block">Search</label>
-//                 <Input
-//                   placeholder="Search by name or specialty..."
-//                   value={searchQuery}
-//                   onChange={(e) => setSearchQuery(e.target.value)}
-//                 />
-//               </div>
-
-//               <div>
-//                 <label className="text-sm font-medium mb-2 block">Category</label>
-//                 <Select value={selectedCategory} onValueChange={setSelectedCategory}>
-//                   <SelectTrigger>
-//                     <SelectValue placeholder="All Categories" />
-//                   </SelectTrigger>
-//                   <SelectContent>
-//                     <SelectItem value="all-categories">All Categories</SelectItem>
-//                     {categories.map((cat) => (
-//                       <SelectItem key={cat} value={cat}>
-//                         {cat.replace(/-/g, " ").toUpperCase()}
-//                       </SelectItem>
-//                     ))}
-//                   </SelectContent>
-//                 </Select>
-//               </div>
-
-//               <div>
-//                 <label className="text-sm font-medium mb-2 block">Min Rating</label>
-//                 <Select value={minRating.toString()} onValueChange={(v) => setMinRating(Number(v))}>
-//                   <SelectTrigger>
-//                     <SelectValue />
-//                   </SelectTrigger>
-//                   <SelectContent>
-//                     <SelectItem value="0">All Ratings</SelectItem>
-//                     <SelectItem value="4">4+ Stars</SelectItem>
-//                     <SelectItem value="4.5">4.5+ Stars</SelectItem>
-//                     <SelectItem value="4.8">4.8+ Stars</SelectItem>
-//                   </SelectContent>
-//                 </Select>
-//               </div>
-
-//               <div>
-//                 <label className="text-sm font-medium mb-2 block">Sort By</label>
-//                 <Select value={sortBy} onValueChange={setSortBy}>
-//                   <SelectTrigger>
-//                     <SelectValue />
-//                   </SelectTrigger>
-//                   <SelectContent>
-//                     <SelectItem value="rating">Highest Rating</SelectItem>
-//                     <SelectItem value="reviews">Most Reviews</SelectItem>
-//                     <SelectItem value="price-low">Price: Low to High</SelectItem>
-//                     <SelectItem value="price-high">Price: High to Low</SelectItem>
-//                   </SelectContent>
-//                 </Select>
-//               </div>
-//             </div>
-
-//             {/* Advanced Filters Toggle */}
-//             <div className="mb-6 flex justify-between items-center">
-//               <p className="text-sm text-muted-foreground">
-//                 Showing {filteredExperts.length} expert{filteredExperts.length !== 1 ? "s" : ""}
-//               </p>
-//               <button
-//                 onClick={() => setShowAdvancedFilters(!showAdvancedFilters)}
-//                 className="lg:hidden flex items-center gap-2 px-4 py-2 border border-border rounded-lg hover:bg-secondary transition-smooth"
-//               >
-//                 <Filter className="w-4 h-4" />
-//                 Advanced Filters
-//               </button>
-//             </div>
-
-//             {/* Experts Grid */}
-//             {filteredExperts.length > 0 ? (
-//               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-//                 {filteredExperts.map((expert, idx) => (
-//                   <Card
-//                     key={expert.id}
-//                     className="hover:shadow-lg transition-smooth overflow-hidden group animate-fade-in"
-//                     style={{ animationDelay: `${idx * 50}ms` }}
-//                   >
-//                     {/* Image */}
-//                     <div className="relative h-48 overflow-hidden bg-muted">
-//                       <img
-//                         src={expert.image || "/placeholder.svg"}
-//                         alt={expert.name}
-//                         className="w-full h-full object-cover group-hover:scale-105 transition-transform"
-//                       />
-//                       <button
-//                         onClick={() => toggleFavorite(expert.id)}
-//                         className="absolute top-3 right-3 p-2 bg-white rounded-full shadow-md hover:bg-secondary transition-smooth"
-//                       >
-//                         <Heart
-//                           className={`w-5 h-5 ${
-//                             favorites.includes(expert.id)
-//                               ? "fill-destructive text-destructive"
-//                               : "text-muted-foreground"
-//                           }`}
-//                         />
-//                       </button>
-//                     </div>
-
-//                     <CardHeader className="pb-3">
-//                       <div className="flex justify-between items-start gap-2">
-//                         <div>
-//                           <CardTitle className="text-lg">{expert.name}</CardTitle>
-//                           <CardDescription>{expert.title}</CardDescription>
-//                         </div>
-//                       </div>
-//                     </CardHeader>
-
-//                     <CardContent className="space-y-3">
-//                       {/* Location */}
-//                       <div className="flex items-center gap-2 text-sm text-muted-foreground">
-//                         <MapPin className="w-4 h-4" />
-//                         {expert.location}
-//                       </div>
-
-//                       {/* Rating */}
-//                       <div className="flex items-center gap-2">
-//                         <div className="flex items-center gap-1">
-//                           <Star className="w-4 h-4 fill-accent text-accent" />
-//                           <span className="font-semibold">{expert.rating}</span>
-//                         </div>
-//                         <span className="text-sm text-muted-foreground">({expert.reviews})</span>
-//                       </div>
-
-//                       {/* Experience */}
-//                       <div className="flex items-center gap-2 text-sm">
-//                         <Award className="w-4 h-4 text-primary" />
-//                         <span>{expert.experience}</span>
-//                       </div>
-
-//                       {/* Specialties */}
-//                       <div className="flex flex-wrap gap-2">
-//                         {expert.specialties.slice(0, 2).map((specialty) => (
-//                           <span key={specialty} className="text-xs bg-secondary px-2 py-1 rounded-full">
-//                             {specialty}
-//                           </span>
-//                         ))}
-//                         {expert.specialties.length > 2 && (
-//                           <span className="text-xs bg-secondary px-2 py-1 rounded-full">
-//                             +{expert.specialties.length - 2}
-//                           </span>
-//                         )}
-//                       </div>
-
-//                       {/* Price */}
-//                       <div className="pt-2 border-t border-border">
-//                         <p className="text-sm font-semibold text-primary">
-//                           ₹{expert.priceRange.min.toLocaleString()} - ₹{expert.priceRange.max.toLocaleString()}
-//                         </p>
-//                       </div>
-
-//                       {/* Actions */}
-//                       <div className="flex gap-2 pt-2">
-//                         <Link href={`/expert/${expert.id}`} className="flex-1">
-//                           <Button className="w-full">View Profile</Button>
-//                         </Link>
-//                         <button className="p-2 hover:bg-secondary rounded-lg transition-smooth">
-//                           <MessageCircle className="w-5 h-5" />
-//                         </button>
-//                         <button className="p-2 hover:bg-secondary rounded-lg transition-smooth">
-//                           <Share2 className="w-5 h-5" />
-//                         </button>
-//                       </div>
-//                     </CardContent>
-//                   </Card>
-//                 ))}
-//               </div>
-//             ) : (
-//               <Card className="text-center py-12">
-//                 <CardContent>
-//                   <p className="text-muted-foreground mb-4">No experts found matching your criteria.</p>
-//                   <Button
-//                     variant="outline"
-//                     onClick={() => {
-//                       setSearchQuery("")
-//                       setSelectedCategory("all-categories")
-//                       setMinRating(0)
-//                       setFilters({
-//                         priceRange: [0, 500000],
-//                         experience: [],
-//                         specialties: [],
-//                         availability: [],
-//                         freeTrial: false,
-//                         hasDiscount: false,
-//                       })
-//                     }}
-//                   >
-//                     Clear All Filters
-//                   </Button>
-//                 </CardContent>
-//               </Card>
-//             )}
-//           </div>
-//         </div>
-//       </div>
-//     </main>
-//   )
-// }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-"use client"
-
-import { useState, useMemo, useEffect } from "react"
-import Navigation from "@/components/navigation"
-import Footer from "@/components/footer"
-import DesignerFilters from "@/components/designer-filters"
-import DesignerCard from "@/components/designer-card"
-import { Input } from "@/components/ui/input"
-import { Button } from "@/components/ui/button"
-import { Search, SlidersHorizontal, Sparkles, Users, FilterX } from "lucide-react"
+import { useState, useMemo, useEffect } from "react";
+import Navigation from "@/components/navigation";
+import Footer from "@/components/footer";
+import DesignerFilters from "@/components/designer-filters";
+import DesignerCard from "@/components/designer-card";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+import {
+  Search,
+  SlidersHorizontal,
+  Sparkles,
+  Users,
+  FilterX,
+} from "lucide-react";
 
 // Mock data - replace with API call
 const allDesigners = [
@@ -495,10 +137,10 @@ const allDesigners = [
     bio: "Glamorous party wear designs",
     freeTrial: false,
   },
-]
+];
 
 export default function DesignersPage() {
-  const [searchQuery, setSearchQuery] = useState("")
+  const [searchQuery, setSearchQuery] = useState("");
   const [filters, setFilters] = useState({
     category: "",
     minPrice: 0,
@@ -506,33 +148,43 @@ export default function DesignersPage() {
     minRating: 0,
     minExperience: 0,
     freeTrial: false,
-  })
-  const [showFilters, setShowFilters] = useState(false)
-  const [isVisible, setIsVisible] = useState(false)
+  });
+  const [showFilters, setShowFilters] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
-    setIsVisible(true)
-  }, [])
+    setIsVisible(true);
+  }, []);
 
   const filteredDesigners = useMemo(() => {
     return allDesigners.filter((designer) => {
       const matchesSearch =
         designer.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
         designer.specialty.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        designer.location.toLowerCase().includes(searchQuery.toLowerCase())
+        designer.location.toLowerCase().includes(searchQuery.toLowerCase());
 
-      const matchesCategory = !filters.category || designer.category === filters.category
-      const matchesPrice = designer.price.min >= filters.minPrice && designer.price.max <= filters.maxPrice
-      const matchesRating = designer.rating >= filters.minRating
-      const matchesExperience = designer.experience >= filters.minExperience
-      const matchesFreeTrial = !filters.freeTrial || designer.freeTrial
+      const matchesCategory =
+        !filters.category || designer.category === filters.category;
+      const matchesPrice =
+        designer.price.min >= filters.minPrice &&
+        designer.price.max <= filters.maxPrice;
+      const matchesRating = designer.rating >= filters.minRating;
+      const matchesExperience = designer.experience >= filters.minExperience;
+      const matchesFreeTrial = !filters.freeTrial || designer.freeTrial;
 
-      return matchesSearch && matchesCategory && matchesPrice && matchesRating && matchesExperience && matchesFreeTrial
-    })
-  }, [searchQuery, filters])
+      return (
+        matchesSearch &&
+        matchesCategory &&
+        matchesPrice &&
+        matchesRating &&
+        matchesExperience &&
+        matchesFreeTrial
+      );
+    });
+  }, [searchQuery, filters]);
 
   const clearAllFilters = () => {
-    setSearchQuery("")
+    setSearchQuery("");
     setFilters({
       category: "",
       minPrice: 0,
@@ -540,8 +192,8 @@ export default function DesignersPage() {
       minRating: 0,
       minExperience: 0,
       freeTrial: false,
-    })
-  }
+    });
+  };
 
   return (
     <main className="min-h-screen bg-gradient-to-b from-white to-rose-50/30 dark:from-gray-900 dark:to-rose-900/20">
@@ -550,7 +202,11 @@ export default function DesignersPage() {
       {/* Page Header */}
       <section className="py-16 bg-gradient-to-r from-rose-50/50 to-amber-50/30 dark:from-rose-900/10 dark:to-amber-900/5 border-b border-rose-100 dark:border-rose-800/30">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className={`text-center transition-all duration-1000 ${isVisible ? 'animate-glow-in' : 'opacity-0'}`}>
+          <div
+            className={`text-center transition-all duration-1000 ${
+              isVisible ? "animate-glow-in" : "opacity-0"
+            }`}
+          >
             <div className="inline-flex items-center gap-2 bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm border border-rose-200 dark:border-rose-800 text-rose-700 dark:text-rose-300 px-4 py-2 rounded-full text-sm mb-6">
               <Sparkles className="w-4 h-4" />
               Find Your Style Expert
@@ -571,7 +227,11 @@ export default function DesignersPage() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="flex flex-col lg:flex-row gap-8">
           {/* Filters Sidebar */}
-          <div className={`lg:w-80 transition-all duration-500 ${showFilters ? "block animate-slide-in-left" : "hidden lg:block"}`}>
+          <div
+            className={`lg:w-80 transition-all duration-500 ${
+              showFilters ? "block animate-slide-in-left" : "hidden lg:block"
+            }`}
+          >
             <div className="sticky top-24">
               <div className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-2xl border border-gray-200 dark:border-gray-700 p-6 shadow-lg">
                 <div className="flex items-center justify-between mb-6">
@@ -617,14 +277,21 @@ export default function DesignersPage() {
             </div>
 
             {/* Results Header */}
-            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-8 gap-4 animate-fade-in-up" style={{ animationDelay: "0.2s" }}>
+            <div
+              className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-8 gap-4 animate-fade-in-up"
+              style={{ animationDelay: "0.2s" }}
+            >
               <div className="flex items-center gap-3">
                 <Users className="w-5 h-5 text-rose-500" />
                 <p className="text-gray-600 dark:text-gray-400">
-                  Showing <span className="font-bold text-gray-900 dark:text-white">{filteredDesigners.length}</span> designers
+                  Showing{" "}
+                  <span className="font-bold text-gray-900 dark:text-white">
+                    {filteredDesigners.length}
+                  </span>{" "}
+                  designers
                 </p>
               </div>
-              
+
               <div className="flex gap-3">
                 <Button
                   variant="outline"
@@ -635,8 +302,13 @@ export default function DesignersPage() {
                   <SlidersHorizontal size={16} className="mr-2" />
                   {showFilters ? "Hide Filters" : "Show Filters"}
                 </Button>
-                
-                {(searchQuery || filters.category || filters.minPrice > 0 || filters.minRating > 0 || filters.minExperience > 0 || filters.freeTrial) && (
+
+                {(searchQuery ||
+                  filters.category ||
+                  filters.minPrice > 0 ||
+                  filters.minRating > 0 ||
+                  filters.minExperience > 0 ||
+                  filters.freeTrial) && (
                   <Button
                     variant="ghost"
                     size="sm"
@@ -654,12 +326,12 @@ export default function DesignersPage() {
             {filteredDesigners.length > 0 ? (
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-6">
                 {filteredDesigners.map((designer, index) => (
-                  <div 
+                  <div
                     key={designer.id}
                     className="animate-card-float"
-                    style={{ 
+                    style={{
                       animationDelay: `${index * 0.1}s`,
-                      animationDuration: '8s'
+                      animationDuration: "8s",
                     }}
                   >
                     <DesignerCard designer={designer} />
@@ -667,7 +339,10 @@ export default function DesignersPage() {
                 ))}
               </div>
             ) : (
-              <div className="text-center py-16 animate-fade-in-up" style={{ animationDelay: "0.4s" }}>
+              <div
+                className="text-center py-16 animate-fade-in-up"
+                style={{ animationDelay: "0.4s" }}
+              >
                 <div className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-2xl border border-gray-200 dark:border-gray-700 p-12 max-w-md mx-auto">
                   <Search className="w-16 h-16 text-gray-300 dark:text-gray-600 mx-auto mb-4" />
                   <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">
@@ -725,7 +400,8 @@ export default function DesignersPage() {
           }
         }
         @keyframes card-float {
-          0%, 100% {
+          0%,
+          100% {
             transform: translateY(0);
           }
           50% {
@@ -747,5 +423,5 @@ export default function DesignersPage() {
         }
       `}</style>
     </main>
-  )
+  );
 }

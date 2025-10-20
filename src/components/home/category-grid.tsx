@@ -1,8 +1,23 @@
-"use client"
+"use client";
 
-import Link from "next/link"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Sparkles, Palette, Scissors, ImageUp as Makeup, Shirt, Zap, Heart, Crown } from "lucide-react"
+import Link from "next/link";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import {
+  Sparkles,
+  Palette,
+  Scissors,
+  ImageUp as Makeup,
+  Shirt,
+  Zap,
+  Heart,
+  Crown,
+} from "lucide-react";
 
 const categories = [
   {
@@ -69,7 +84,7 @@ const categories = [
     color: "from-indigo-500 to-blue-500",
     count: "240+",
   },
-]
+];
 
 export default function CategoryGrid() {
   return (
@@ -77,12 +92,14 @@ export default function CategoryGrid() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
           <h2 className="text-3xl font-bold mb-4">Browse by Category</h2>
-          <p className="text-muted-foreground max-w-2xl mx-auto">Find the perfect expert for your needs</p>
+          <p className="text-muted-foreground max-w-2xl mx-auto">
+            Find the perfect expert for your needs
+          </p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {categories.map((category, idx) => {
-            const Icon = category.icon
+            const Icon = category.icon;
             return (
               <Link key={category.id} href={`/browse?category=${category.id}`}>
                 <Card
@@ -99,14 +116,16 @@ export default function CategoryGrid() {
                     <CardDescription>{category.description}</CardDescription>
                   </CardHeader>
                   <CardContent>
-                    <p className="text-sm font-semibold text-primary">{category.count} experts</p>
+                    <p className="text-sm font-semibold text-primary">
+                      {category.count} experts
+                    </p>
                   </CardContent>
                 </Card>
               </Link>
-            )
+            );
           })}
         </div>
       </div>
     </section>
-  )
+  );
 }

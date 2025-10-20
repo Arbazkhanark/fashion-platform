@@ -1,18 +1,18 @@
-"use client"
+"use client";
 
-import type React from "react"
+import type React from "react";
 
-import { useState, useRef, useEffect } from "react"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Card } from "@/components/ui/card"
-import { Send } from "lucide-react"
+import { useState, useRef, useEffect } from "react";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Card } from "@/components/ui/card";
+import { Send } from "lucide-react";
 
 interface Message {
-  id: string
-  type: "user" | "assistant"
-  content: string
-  timestamp: Date
+  id: string;
+  type: "user" | "assistant";
+  content: string;
+  timestamp: Date;
 }
 
 const styleAssistantResponses: Record<string, string> = {
@@ -76,7 +76,7 @@ Ask me about:
 - Seasonal fashion tips
 
 What would you like styling advice on?`,
-}
+};
 
 export default function StyleAssistantChat() {
   const [messages, setMessages] = useState<Message[]>([
@@ -86,22 +86,22 @@ export default function StyleAssistantChat() {
       content: styleAssistantResponses.default,
       timestamp: new Date(),
     },
-  ])
-  const [input, setInput] = useState("")
-  const [isLoading, setIsLoading] = useState(false)
-  const messagesEndRef = useRef<HTMLDivElement>(null)
+  ]);
+  const [input, setInput] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+  const messagesEndRef = useRef<HTMLDivElement>(null);
 
   const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" })
-  }
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  };
 
   useEffect(() => {
-    scrollToBottom()
-  }, [messages])
+    scrollToBottom();
+  }, [messages]);
 
   const handleSendMessage = async (e: React.FormEvent) => {
-    e.preventDefault()
-    if (!input.trim()) return
+    e.preventDefault();
+    if (!input.trim()) return;
 
     // Add user message
     const userMessage: Message = {
@@ -109,29 +109,36 @@ export default function StyleAssistantChat() {
       type: "user",
       content: input,
       timestamp: new Date(),
-    }
+    };
 
-    setMessages((prev) => [...prev, userMessage])
-    setInput("")
-    setIsLoading(true)
+    setMessages((prev) => [...prev, userMessage]);
+    setInput("");
+    setIsLoading(true);
 
     // Simulate AI response delay
     setTimeout(() => {
-      const lowerInput = input.toLowerCase()
-      let response = styleAssistantResponses.default
+      const lowerInput = input.toLowerCase();
+      let response = styleAssistantResponses.default;
 
       if (lowerInput.includes("wedding") || lowerInput.includes("bridal")) {
-        response = styleAssistantResponses.wedding
-      } else if (lowerInput.includes("casual") || lowerInput.includes("everyday")) {
-        response = styleAssistantResponses.casual
+        response = styleAssistantResponses.wedding;
+      } else if (
+        lowerInput.includes("casual") ||
+        lowerInput.includes("everyday")
+      ) {
+        response = styleAssistantResponses.casual;
       } else if (
         lowerInput.includes("corporate") ||
         lowerInput.includes("professional") ||
         lowerInput.includes("office")
       ) {
-        response = styleAssistantResponses.corporate
-      } else if (lowerInput.includes("party") || lowerInput.includes("evening") || lowerInput.includes("event")) {
-        response = styleAssistantResponses.party
+        response = styleAssistantResponses.corporate;
+      } else if (
+        lowerInput.includes("party") ||
+        lowerInput.includes("evening") ||
+        lowerInput.includes("event")
+      ) {
+        response = styleAssistantResponses.party;
       }
 
       const assistantMessage: Message = {
@@ -139,12 +146,12 @@ export default function StyleAssistantChat() {
         type: "assistant",
         content: response,
         timestamp: new Date(),
-      }
+      };
 
-      setMessages((prev) => [...prev, assistantMessage])
-      setIsLoading(false)
-    }, 1000)
-  }
+      setMessages((prev) => [...prev, assistantMessage]);
+      setIsLoading(false);
+    }, 1000);
+  };
 
   return (
     <div className="flex-1 flex flex-col max-w-4xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-8">
@@ -153,7 +160,12 @@ export default function StyleAssistantChat() {
         {/* Messages Area */}
         <div className="flex-1 overflow-y-auto p-6 space-y-4">
           {messages.map((message) => (
-            <div key={message.id} className={`flex ${message.type === "user" ? "justify-end" : "justify-start"}`}>
+            <div
+              key={message.id}
+              className={`flex ${
+                message.type === "user" ? "justify-end" : "justify-start"
+              }`}
+            >
               <div
                 className={`max-w-xs lg:max-w-md xl:max-w-lg px-4 py-3 rounded-lg ${
                   message.type === "user"
@@ -163,9 +175,16 @@ export default function StyleAssistantChat() {
               >
                 <p className="text-sm whitespace-pre-wrap">{message.content}</p>
                 <p
-                  className={`text-xs mt-2 ${message.type === "user" ? "text-accent-foreground/70" : "text-muted-foreground"}`}
+                  className={`text-xs mt-2 ${
+                    message.type === "user"
+                      ? "text-accent-foreground/70"
+                      : "text-muted-foreground"
+                  }`}
                 >
-                  {message.timestamp.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}
+                  {message.timestamp.toLocaleTimeString([], {
+                    hour: "2-digit",
+                    minute: "2-digit",
+                  })}
                 </p>
               </div>
             </div>
@@ -231,11 +250,13 @@ export default function StyleAssistantChat() {
               className="flex items-center gap-3 p-3 rounded-lg bg-secondary hover:bg-secondary/80 transition text-left"
             >
               <span className="text-xl">{suggestion.icon}</span>
-              <span className="text-sm font-medium text-foreground">{suggestion.text}</span>
+              <span className="text-sm font-medium text-foreground">
+                {suggestion.text}
+              </span>
             </button>
           ))}
         </div>
       </div>
     </div>
-  )
+  );
 }

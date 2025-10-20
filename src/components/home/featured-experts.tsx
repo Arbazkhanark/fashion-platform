@@ -1,9 +1,15 @@
-"use client"
+"use client";
 
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
-import { Star, MapPin, Award } from "lucide-react"
-import Link from "next/link"
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Star, MapPin, Award } from "lucide-react";
+import Link from "next/link";
 
 const featuredExperts = [
   {
@@ -58,7 +64,7 @@ const featuredExperts = [
     clients: "400+",
     price: "₹2,000 - ₹10,000",
   },
-]
+];
 
 export default function FeaturedExperts() {
   return (
@@ -100,7 +106,9 @@ export default function FeaturedExperts() {
                       <Star className="w-4 h-4 fill-accent text-accent" />
                       <span className="font-semibold">{expert.rating}</span>
                     </div>
-                    <span className="text-sm text-muted-foreground">({expert.reviews})</span>
+                    <span className="text-sm text-muted-foreground">
+                      ({expert.reviews})
+                    </span>
                   </div>
 
                   <div className="flex items-center gap-2 text-sm">
@@ -109,7 +117,9 @@ export default function FeaturedExperts() {
                   </div>
 
                   <div className="pt-2 border-t border-border">
-                    <p className="text-sm font-semibold text-primary">{expert.price}</p>
+                    <p className="text-sm font-semibold text-primary">
+                      {expert.price}
+                    </p>
                   </div>
 
                   <Button className="w-full mt-2">View Profile</Button>
@@ -128,5 +138,5 @@ export default function FeaturedExperts() {
         </div>
       </div>
     </section>
-  )
+  );
 }

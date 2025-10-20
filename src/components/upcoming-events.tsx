@@ -1,8 +1,8 @@
-"use client"
+"use client";
 
-import { Card } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
-import { Calendar, MapPin, Video } from "lucide-react"
+import { Card } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Calendar, MapPin, Video } from "lucide-react";
 
 const upcomingAppointments = [
   {
@@ -35,23 +35,34 @@ const upcomingAppointments = [
     location: "Delhi",
     status: "pending",
   },
-]
+];
 
 export default function UpcomingAppointments() {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-3xl font-bold text-foreground mb-2">Upcoming Appointments</h1>
-        <p className="text-muted-foreground">You have {upcomingAppointments.length} upcoming appointments</p>
+        <h1 className="text-3xl font-bold text-foreground mb-2">
+          Upcoming Appointments
+        </h1>
+        <p className="text-muted-foreground">
+          You have {upcomingAppointments.length} upcoming appointments
+        </p>
       </div>
 
       <div className="space-y-4">
         {upcomingAppointments.map((appointment) => (
-          <Card key={appointment.id} className="p-6 border border-border hover:shadow-lg transition">
+          <Card
+            key={appointment.id}
+            className="p-6 border border-border hover:shadow-lg transition"
+          >
             <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
               <div className="flex-1">
-                <h3 className="text-xl font-bold text-foreground mb-2">{appointment.designer}</h3>
-                <p className="text-accent font-semibold mb-3">{appointment.specialty}</p>
+                <h3 className="text-xl font-bold text-foreground mb-2">
+                  {appointment.designer}
+                </h3>
+                <p className="text-accent font-semibold mb-3">
+                  {appointment.specialty}
+                </p>
 
                 <div className="space-y-2 text-sm text-muted-foreground">
                   <div className="flex items-center gap-2">
@@ -105,12 +116,14 @@ export default function UpcomingAppointments() {
                     : "bg-yellow-500/20 text-yellow-700"
                 }`}
               >
-                {appointment.status === "confirmed" ? "✓ Confirmed" : "⏳ Pending Confirmation"}
+                {appointment.status === "confirmed"
+                  ? "✓ Confirmed"
+                  : "⏳ Pending Confirmation"}
               </span>
             </div>
           </Card>
         ))}
       </div>
     </div>
-  )
+  );
 }

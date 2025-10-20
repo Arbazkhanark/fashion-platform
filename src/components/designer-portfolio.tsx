@@ -1,28 +1,39 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import { ChevronLeft, ChevronRight, X } from "lucide-react"
-import { Button } from "@/components/ui/button"
+import { useState } from "react";
+import { ChevronLeft, ChevronRight, X } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import Image from "next/image";
 
 interface PortfolioItem {
-  id: number
-  title: string
-  image: string
+  id: number;
+  title: string;
+  image: string;
 }
 
-export default function DesignerPortfolio({ portfolio }: { portfolio: PortfolioItem[] }) {
-  const [selectedImage, setSelectedImage] = useState<PortfolioItem | null>(null)
-  const [currentIndex, setCurrentIndex] = useState(0)
+export default function DesignerPortfolio({
+  portfolio,
+}: {
+  portfolio: PortfolioItem[];
+}) {
+  const [selectedImage, setSelectedImage] = useState<PortfolioItem | null>(
+    null
+  );
+  const [currentIndex, setCurrentIndex] = useState(0);
 
   const handlePrevious = () => {
-    setCurrentIndex((prev) => (prev === 0 ? portfolio.length - 1 : prev - 1))
-    setSelectedImage(portfolio[currentIndex === 0 ? portfolio.length - 1 : currentIndex - 1])
-  }
+    setCurrentIndex((prev) => (prev === 0 ? portfolio.length - 1 : prev - 1));
+    setSelectedImage(
+      portfolio[currentIndex === 0 ? portfolio.length - 1 : currentIndex - 1]
+    );
+  };
 
   const handleNext = () => {
-    setCurrentIndex((prev) => (prev === portfolio.length - 1 ? 0 : prev + 1))
-    setSelectedImage(portfolio[currentIndex === portfolio.length - 1 ? 0 : currentIndex + 1])
-  }
+    setCurrentIndex((prev) => (prev === portfolio.length - 1 ? 0 : prev + 1));
+    setSelectedImage(
+      portfolio[currentIndex === portfolio.length - 1 ? 0 : currentIndex + 1]
+    );
+  };
 
   return (
     <div>
@@ -35,12 +46,14 @@ export default function DesignerPortfolio({ portfolio }: { portfolio: PortfolioI
             key={item.id}
             className="relative overflow-hidden rounded-lg h-48 bg-muted cursor-pointer group"
             onClick={() => {
-              setSelectedImage(item)
-              setCurrentIndex(index)
+              setSelectedImage(item);
+              setCurrentIndex(index);
             }}
           >
-            <img
+            <Image
               src={item.image || "/placeholder.svg"}
+              width={400}
+              height={192}
               alt={item.title}
               className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
             />
@@ -60,7 +73,9 @@ export default function DesignerPortfolio({ portfolio }: { portfolio: PortfolioI
       {selectedImage && (
         <div className="fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-4">
           <div className="relative max-w-4xl w-full">
-            <img
+            <Image
+              width={800}
+              height={600}
               src={selectedImage.image || "/placeholder.svg"}
               alt={selectedImage.title}
               className="w-full h-auto rounded-lg"
@@ -106,5 +121,5 @@ export default function DesignerPortfolio({ portfolio }: { portfolio: PortfolioI
         </div>
       )}
     </div>
-  )
+  );
 }

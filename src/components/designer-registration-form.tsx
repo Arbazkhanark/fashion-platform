@@ -1,13 +1,13 @@
-"use client"
+"use client";
 
-import type React from "react"
+import type React from "react";
 
-import { useState } from "react"
-import { Card } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Checkbox } from "@/components/ui/checkbox"
-import { Upload, Check } from "lucide-react"
+import { useState } from "react";
+import { Card } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Checkbox } from "@/components/ui/checkbox";
+import { Upload, Check } from "lucide-react";
 
 const categories = [
   { id: "wedding", label: "Wedding" },
@@ -15,13 +15,31 @@ const categories = [
   { id: "corporate", label: "Corporate" },
   { id: "party", label: "Party & Events" },
   { id: "birthday", label: "Birthday" },
-]
+];
 
-const days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
-const timeSlots = ["9:00 AM", "10:00 AM", "11:00 AM", "12:00 PM", "1:00 PM", "2:00 PM", "3:00 PM", "4:00 PM", "5:00 PM"]
+const days = [
+  "Monday",
+  "Tuesday",
+  "Wednesday",
+  "Thursday",
+  "Friday",
+  "Saturday",
+  "Sunday",
+];
+const timeSlots = [
+  "9:00 AM",
+  "10:00 AM",
+  "11:00 AM",
+  "12:00 PM",
+  "1:00 PM",
+  "2:00 PM",
+  "3:00 PM",
+  "4:00 PM",
+  "5:00 PM",
+];
 
 export default function DesignerRegistrationForm() {
-  const [step, setStep] = useState(1)
+  const [step, setStep] = useState(1);
   const [formData, setFormData] = useState({
     // Personal Info
     firstName: "",
@@ -54,14 +72,16 @@ export default function DesignerRegistrationForm() {
     // Credentials
     certifications: "",
     freeTrial: false,
-  })
+  });
 
-  const [submitted, setSubmitted] = useState(false)
+  const [submitted, setSubmitted] = useState(false);
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { name, value } = e.target
-    setFormData((prev) => ({ ...prev, [name]: value }))
-  }
+  const handleInputChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
 
   const handleSpecialtyChange = (specialty: string) => {
     setFormData((prev) => ({
@@ -69,8 +89,8 @@ export default function DesignerRegistrationForm() {
       specialties: prev.specialties.includes(specialty)
         ? prev.specialties.filter((s) => s !== specialty)
         : [...prev.specialties, specialty],
-    }))
-  }
+    }));
+  };
 
   const handleDayChange = (day: string) => {
     setFormData((prev) => ({
@@ -78,46 +98,61 @@ export default function DesignerRegistrationForm() {
       availableDays: prev.availableDays.includes(day)
         ? prev.availableDays.filter((d) => d !== day)
         : [...prev.availableDays, day],
-    }))
-  }
+    }));
+  };
 
   const handlePortfolioUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files) {
       setFormData((prev) => ({
         ...prev,
-        portfolioImages: [...prev.portfolioImages, ...Array.from(e.target.files || [])],
-      }))
+        portfolioImages: [
+          ...prev.portfolioImages,
+          ...Array.from(e.target.files || []),
+        ],
+      }));
     }
-  }
+  };
 
   const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
+    e.preventDefault();
     if (step < 4) {
-      setStep(step + 1)
+      setStep(step + 1);
     } else {
-      setSubmitted(true)
-      console.log("Form submitted:", formData)
+      setSubmitted(true);
+      console.log("Form submitted:", formData);
     }
-  }
+  };
 
   const handleBack = () => {
-    if (step > 1) setStep(step - 1)
-  }
+    if (step > 1) setStep(step - 1);
+  };
 
   const isStepValid = () => {
     switch (step) {
       case 1:
-        return formData.firstName && formData.lastName && formData.email && formData.phone && formData.location
+        return (
+          formData.firstName &&
+          formData.lastName &&
+          formData.email &&
+          formData.phone &&
+          formData.location
+        );
       case 2:
-        return formData.specialties.length > 0 && formData.experience && formData.bio
+        return (
+          formData.specialties.length > 0 && formData.experience && formData.bio
+        );
       case 3:
-        return formData.minPrice && formData.maxPrice && formData.availableDays.length > 0
+        return (
+          formData.minPrice &&
+          formData.maxPrice &&
+          formData.availableDays.length > 0
+        );
       case 4:
-        return true
+        return true;
       default:
-        return false
+        return false;
     }
-  }
+  };
 
   if (submitted) {
     return (
@@ -125,9 +160,12 @@ export default function DesignerRegistrationForm() {
         <div className="w-20 h-20 bg-green-500/20 rounded-full flex items-center justify-center mx-auto mb-6">
           <Check size={40} className="text-green-600" />
         </div>
-        <h2 className="text-3xl font-bold text-foreground mb-4">Registration Successful!</h2>
+        <h2 className="text-3xl font-bold text-foreground mb-4">
+          Registration Successful!
+        </h2>
         <p className="text-lg text-muted-foreground mb-8">
-          Thank you for joining StyleConnect. Our team will review your application and contact you within 24 hours.
+          Thank you for joining StyleConnect. Our team will review your
+          application and contact you within 24 hours.
         </p>
         <Button
           className="bg-accent hover:bg-accent/90 text-accent-foreground"
@@ -136,7 +174,7 @@ export default function DesignerRegistrationForm() {
           Back to Home
         </Button>
       </Card>
-    )
+    );
   }
 
   return (
@@ -148,7 +186,9 @@ export default function DesignerRegistrationForm() {
             <div key={s} className="flex flex-col items-center flex-1">
               <div
                 className={`w-10 h-10 rounded-full flex items-center justify-center font-bold mb-2 transition ${
-                  s <= step ? "bg-accent text-accent-foreground" : "bg-secondary text-muted-foreground"
+                  s <= step
+                    ? "bg-accent text-accent-foreground"
+                    : "bg-secondary text-muted-foreground"
                 }`}
               >
                 {s}
@@ -163,7 +203,10 @@ export default function DesignerRegistrationForm() {
           ))}
         </div>
         <div className="h-1 bg-secondary rounded-full overflow-hidden">
-          <div className="h-full bg-accent transition-all" style={{ width: `${(step / 4) * 100}%` }} />
+          <div
+            className="h-full bg-accent transition-all"
+            style={{ width: `${(step / 4) * 100}%` }}
+          />
         </div>
       </div>
 
@@ -171,11 +214,15 @@ export default function DesignerRegistrationForm() {
         {/* Step 1: Personal Information */}
         {step === 1 && (
           <div className="space-y-6">
-            <h2 className="text-2xl font-bold text-foreground">Personal Information</h2>
+            <h2 className="text-2xl font-bold text-foreground">
+              Personal Information
+            </h2>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
-                <label className="block text-sm font-semibold text-foreground mb-2">First Name *</label>
+                <label className="block text-sm font-semibold text-foreground mb-2">
+                  First Name *
+                </label>
                 <Input
                   type="text"
                   name="firstName"
@@ -186,7 +233,9 @@ export default function DesignerRegistrationForm() {
                 />
               </div>
               <div>
-                <label className="block text-sm font-semibold text-foreground mb-2">Last Name *</label>
+                <label className="block text-sm font-semibold text-foreground mb-2">
+                  Last Name *
+                </label>
                 <Input
                   type="text"
                   name="lastName"
@@ -199,7 +248,9 @@ export default function DesignerRegistrationForm() {
             </div>
 
             <div>
-              <label className="block text-sm font-semibold text-foreground mb-2">Email Address *</label>
+              <label className="block text-sm font-semibold text-foreground mb-2">
+                Email Address *
+              </label>
               <Input
                 type="email"
                 name="email"
@@ -211,7 +262,9 @@ export default function DesignerRegistrationForm() {
             </div>
 
             <div>
-              <label className="block text-sm font-semibold text-foreground mb-2">Phone Number *</label>
+              <label className="block text-sm font-semibold text-foreground mb-2">
+                Phone Number *
+              </label>
               <Input
                 type="tel"
                 name="phone"
@@ -223,7 +276,9 @@ export default function DesignerRegistrationForm() {
             </div>
 
             <div>
-              <label className="block text-sm font-semibold text-foreground mb-2">Location *</label>
+              <label className="block text-sm font-semibold text-foreground mb-2">
+                Location *
+              </label>
               <Input
                 type="text"
                 name="location"
@@ -239,13 +294,20 @@ export default function DesignerRegistrationForm() {
         {/* Step 2: Professional Information */}
         {step === 2 && (
           <div className="space-y-6">
-            <h2 className="text-2xl font-bold text-foreground">Professional Information</h2>
+            <h2 className="text-2xl font-bold text-foreground">
+              Professional Information
+            </h2>
 
             <div>
-              <label className="block text-sm font-semibold text-foreground mb-3">Specialties *</label>
+              <label className="block text-sm font-semibold text-foreground mb-3">
+                Specialties *
+              </label>
               <div className="grid grid-cols-2 gap-3">
                 {categories.map((cat) => (
-                  <label key={cat.id} className="flex items-center gap-3 cursor-pointer">
+                  <label
+                    key={cat.id}
+                    className="flex items-center gap-3 cursor-pointer"
+                  >
                     <Checkbox
                       checked={formData.specialties.includes(cat.id)}
                       onCheckedChange={() => handleSpecialtyChange(cat.id)}
@@ -257,7 +319,9 @@ export default function DesignerRegistrationForm() {
             </div>
 
             <div>
-              <label className="block text-sm font-semibold text-foreground mb-2">Years of Experience *</label>
+              <label className="block text-sm font-semibold text-foreground mb-2">
+                Years of Experience *
+              </label>
               <Input
                 type="number"
                 name="experience"
@@ -269,7 +333,9 @@ export default function DesignerRegistrationForm() {
             </div>
 
             <div>
-              <label className="block text-sm font-semibold text-foreground mb-2">Professional Bio *</label>
+              <label className="block text-sm font-semibold text-foreground mb-2">
+                Professional Bio *
+              </label>
               <textarea
                 name="bio"
                 value={formData.bio}
@@ -281,7 +347,9 @@ export default function DesignerRegistrationForm() {
             </div>
 
             <div>
-              <label className="block text-sm font-semibold text-foreground mb-2">Certifications & Credentials</label>
+              <label className="block text-sm font-semibold text-foreground mb-2">
+                Certifications & Credentials
+              </label>
               <Input
                 type="text"
                 name="certifications"
@@ -295,9 +363,16 @@ export default function DesignerRegistrationForm() {
             <label className="flex items-center gap-3 cursor-pointer">
               <Checkbox
                 checked={formData.freeTrial}
-                onCheckedChange={(checked) => setFormData((prev) => ({ ...prev, freeTrial: checked as boolean }))}
+                onCheckedChange={(checked) =>
+                  setFormData((prev) => ({
+                    ...prev,
+                    freeTrial: checked as boolean,
+                  }))
+                }
               />
-              <span className="text-sm text-foreground">Offer free trial consultation</span>
+              <span className="text-sm text-foreground">
+                Offer free trial consultation
+              </span>
             </label>
           </div>
         )}
@@ -305,11 +380,15 @@ export default function DesignerRegistrationForm() {
         {/* Step 3: Pricing & Availability */}
         {step === 3 && (
           <div className="space-y-6">
-            <h2 className="text-2xl font-bold text-foreground">Pricing & Availability</h2>
+            <h2 className="text-2xl font-bold text-foreground">
+              Pricing & Availability
+            </h2>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
-                <label className="block text-sm font-semibold text-foreground mb-2">Minimum Price (₹) *</label>
+                <label className="block text-sm font-semibold text-foreground mb-2">
+                  Minimum Price (₹) *
+                </label>
                 <Input
                   type="number"
                   name="minPrice"
@@ -320,7 +399,9 @@ export default function DesignerRegistrationForm() {
                 />
               </div>
               <div>
-                <label className="block text-sm font-semibold text-foreground mb-2">Maximum Price (₹) *</label>
+                <label className="block text-sm font-semibold text-foreground mb-2">
+                  Maximum Price (₹) *
+                </label>
                 <Input
                   type="number"
                   name="maxPrice"
@@ -333,10 +414,15 @@ export default function DesignerRegistrationForm() {
             </div>
 
             <div>
-              <label className="block text-sm font-semibold text-foreground mb-3">Available Days *</label>
+              <label className="block text-sm font-semibold text-foreground mb-3">
+                Available Days *
+              </label>
               <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
                 {days.map((day) => (
-                  <label key={day} className="flex items-center gap-2 cursor-pointer">
+                  <label
+                    key={day}
+                    className="flex items-center gap-2 cursor-pointer"
+                  >
                     <Checkbox
                       checked={formData.availableDays.includes(day)}
                       onCheckedChange={() => handleDayChange(day)}
@@ -349,13 +435,18 @@ export default function DesignerRegistrationForm() {
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
-                <label className="block text-sm font-semibold text-foreground mb-2">Available From</label>
+                <label className="block text-sm font-semibold text-foreground mb-2">
+                  Available From
+                </label>
                 <select
                   value={formData.availableHours.start}
                   onChange={(e) =>
                     setFormData((prev) => ({
                       ...prev,
-                      availableHours: { ...prev.availableHours, start: e.target.value },
+                      availableHours: {
+                        ...prev.availableHours,
+                        start: e.target.value,
+                      },
                     }))
                   }
                   className="w-full px-4 py-2 rounded-lg bg-secondary border border-border text-foreground focus:outline-none focus:ring-2 focus:ring-accent"
@@ -369,13 +460,18 @@ export default function DesignerRegistrationForm() {
                 </select>
               </div>
               <div>
-                <label className="block text-sm font-semibold text-foreground mb-2">Available Until</label>
+                <label className="block text-sm font-semibold text-foreground mb-2">
+                  Available Until
+                </label>
                 <select
                   value={formData.availableHours.end}
                   onChange={(e) =>
                     setFormData((prev) => ({
                       ...prev,
-                      availableHours: { ...prev.availableHours, end: e.target.value },
+                      availableHours: {
+                        ...prev.availableHours,
+                        end: e.target.value,
+                      },
                     }))
                   }
                   className="w-full px-4 py-2 rounded-lg bg-secondary border border-border text-foreground focus:outline-none focus:ring-2 focus:ring-accent"
@@ -395,15 +491,32 @@ export default function DesignerRegistrationForm() {
         {/* Step 4: Portfolio & Social Links */}
         {step === 4 && (
           <div className="space-y-6">
-            <h2 className="text-2xl font-bold text-foreground">Portfolio & Social Links</h2>
+            <h2 className="text-2xl font-bold text-foreground">
+              Portfolio & Social Links
+            </h2>
 
             <div>
-              <label className="block text-sm font-semibold text-foreground mb-3">Portfolio Images</label>
+              <label className="block text-sm font-semibold text-foreground mb-3">
+                Portfolio Images
+              </label>
               <label className="border-2 border-dashed border-border rounded-lg p-8 cursor-pointer hover:border-accent transition text-center">
-                <Upload size={32} className="mx-auto mb-2 text-muted-foreground" />
-                <p className="text-sm font-semibold text-foreground mb-1">Click to upload or drag and drop</p>
-                <p className="text-xs text-muted-foreground">PNG, JPG, GIF up to 10MB</p>
-                <input type="file" multiple accept="image/*" onChange={handlePortfolioUpload} className="hidden" />
+                <Upload
+                  size={32}
+                  className="mx-auto mb-2 text-muted-foreground"
+                />
+                <p className="text-sm font-semibold text-foreground mb-1">
+                  Click to upload or drag and drop
+                </p>
+                <p className="text-xs text-muted-foreground">
+                  PNG, JPG, GIF up to 10MB
+                </p>
+                <input
+                  type="file"
+                  multiple
+                  accept="image/*"
+                  onChange={handlePortfolioUpload}
+                  className="hidden"
+                />
               </label>
               {formData.portfolioImages.length > 0 && (
                 <div className="mt-4">
@@ -415,7 +528,9 @@ export default function DesignerRegistrationForm() {
             </div>
 
             <div>
-              <label className="block text-sm font-semibold text-foreground mb-2">Instagram Profile</label>
+              <label className="block text-sm font-semibold text-foreground mb-2">
+                Instagram Profile
+              </label>
               <Input
                 type="url"
                 name="instagram"
@@ -427,7 +542,9 @@ export default function DesignerRegistrationForm() {
             </div>
 
             <div>
-              <label className="block text-sm font-semibold text-foreground mb-2">Facebook Profile</label>
+              <label className="block text-sm font-semibold text-foreground mb-2">
+                Facebook Profile
+              </label>
               <Input
                 type="url"
                 name="facebook"
@@ -439,7 +556,9 @@ export default function DesignerRegistrationForm() {
             </div>
 
             <div>
-              <label className="block text-sm font-semibold text-foreground mb-2">Pinterest Profile</label>
+              <label className="block text-sm font-semibold text-foreground mb-2">
+                Pinterest Profile
+              </label>
               <Input
                 type="url"
                 name="pinterest"
@@ -473,5 +592,5 @@ export default function DesignerRegistrationForm() {
         </div>
       </form>
     </Card>
-  )
+  );
 }

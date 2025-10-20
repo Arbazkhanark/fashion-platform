@@ -1,14 +1,25 @@
-"use client"
-import { Calendar, History, Heart, Settings, LogOut, Menu, X } from "lucide-react"
-import { useState } from "react"
+"use client";
+import {
+  Calendar,
+  History,
+  Heart,
+  Settings,
+  LogOut,
+  Menu,
+  X,
+} from "lucide-react";
+import { useState } from "react";
 
 interface DashboardSidebarProps {
-  activeTab: string
-  setActiveTab: (tab: string) => void
+  activeTab: string;
+  setActiveTab: (tab: string) => void;
 }
 
-export default function DashboardSidebar({ activeTab, setActiveTab }: DashboardSidebarProps) {
-  const [isOpen, setIsOpen] = useState(false)
+export default function DashboardSidebar({
+  activeTab,
+  setActiveTab,
+}: DashboardSidebarProps) {
+  const [isOpen, setIsOpen] = useState(false);
 
   const menuItems = [
     { id: "overview", label: "Overview", icon: Calendar },
@@ -16,7 +27,7 @@ export default function DashboardSidebar({ activeTab, setActiveTab }: DashboardS
     { id: "bookings", label: "Booking History", icon: History },
     { id: "saved", label: "Saved Designers", icon: Heart },
     { id: "settings", label: "Settings", icon: Settings },
-  ]
+  ];
 
   return (
     <>
@@ -35,7 +46,9 @@ export default function DashboardSidebar({ activeTab, setActiveTab }: DashboardS
         } z-30`}
       >
         <div className="p-6">
-          <h2 className="text-2xl font-bold text-foreground mb-8">My Dashboard</h2>
+          <h2 className="text-2xl font-bold text-foreground mb-8">
+            My Dashboard
+          </h2>
 
           {/* User Profile Card */}
           <div className="bg-secondary/50 rounded-lg p-4 mb-8">
@@ -49,22 +62,24 @@ export default function DashboardSidebar({ activeTab, setActiveTab }: DashboardS
           {/* Menu Items */}
           <nav className="space-y-2">
             {menuItems.map((item) => {
-              const Icon = item.icon
+              const Icon = item.icon;
               return (
                 <button
                   key={item.id}
                   onClick={() => {
-                    setActiveTab(item.id)
-                    setIsOpen(false)
+                    setActiveTab(item.id);
+                    setIsOpen(false);
                   }}
                   className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg transition ${
-                    activeTab === item.id ? "bg-accent text-accent-foreground" : "text-foreground hover:bg-secondary"
+                    activeTab === item.id
+                      ? "bg-accent text-accent-foreground"
+                      : "text-foreground hover:bg-secondary"
                   }`}
                 >
                   <Icon size={20} />
                   <span className="font-medium">{item.label}</span>
                 </button>
-              )
+              );
             })}
           </nav>
 
@@ -77,7 +92,12 @@ export default function DashboardSidebar({ activeTab, setActiveTab }: DashboardS
       </aside>
 
       {/* Mobile Overlay */}
-      {isOpen && <div className="fixed inset-0 bg-black/50 md:hidden z-20" onClick={() => setIsOpen(false)} />}
+      {isOpen && (
+        <div
+          className="fixed inset-0 bg-black/50 md:hidden z-20"
+          onClick={() => setIsOpen(false)}
+        />
+      )}
     </>
-  )
+  );
 }

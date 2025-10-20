@@ -158,32 +158,26 @@
 //   )
 // }
 
+"use client";
 
-
-
-
-
-
-"use client"
-
-import { Card } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
-import { Checkbox } from "@/components/ui/checkbox"
-import { Slider } from "@/components/ui/slider"
+import { Card } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Checkbox } from "@/components/ui/checkbox";
+import { Slider } from "@/components/ui/slider";
 
 // Define the shape of your filters clearly
 export interface Filters {
-  category: string
-  minPrice: number
-  maxPrice: number
-  minRating: number
-  minExperience: number
-  freeTrial: boolean
+  category: string;
+  minPrice: number;
+  maxPrice: number;
+  minRating: number;
+  minExperience: number;
+  freeTrial: boolean;
 }
 
 interface DesignerFiltersProps {
-  filters: Filters
-  setFilters: (filters: Filters) => void
+  filters: Filters;
+  setFilters: (filters: Filters) => void;
 }
 
 const categories = [
@@ -192,37 +186,40 @@ const categories = [
   { id: "corporate", label: "Corporate" },
   { id: "party", label: "Party & Events" },
   { id: "birthday", label: "Birthday" },
-]
+];
 
-export default function DesignerFilters({ filters, setFilters }: DesignerFiltersProps) {
+export default function DesignerFilters({
+  filters,
+  setFilters,
+}: DesignerFiltersProps) {
   const handleCategoryChange = (categoryId: string) => {
     setFilters({
       ...filters,
       category: filters.category === categoryId ? "" : categoryId,
-    })
-  }
+    });
+  };
 
   const handlePriceChange = (value: number[]) => {
     setFilters({
       ...filters,
       minPrice: value[0],
       maxPrice: value[1],
-    })
-  }
+    });
+  };
 
   const handleRatingChange = (rating: number) => {
     setFilters({
       ...filters,
       minRating: filters.minRating === rating ? 0 : rating,
-    })
-  }
+    });
+  };
 
   const handleExperienceChange = (years: number) => {
     setFilters({
       ...filters,
       minExperience: filters.minExperience === years ? 0 : years,
-    })
-  }
+    });
+  };
 
   return (
     <Card className="p-6 space-y-6">
@@ -231,7 +228,10 @@ export default function DesignerFilters({ filters, setFilters }: DesignerFilters
         <h3 className="font-bold text-foreground mb-4">Category</h3>
         <div className="space-y-3">
           {categories.map((cat) => (
-            <label key={cat.id} className="flex items-center gap-3 cursor-pointer">
+            <label
+              key={cat.id}
+              className="flex items-center gap-3 cursor-pointer"
+            >
               <Checkbox
                 checked={filters.category === cat.id}
                 onCheckedChange={() => handleCategoryChange(cat.id)}
@@ -335,5 +335,5 @@ export default function DesignerFilters({ filters, setFilters }: DesignerFilters
         Reset Filters
       </Button>
     </Card>
-  )
+  );
 }

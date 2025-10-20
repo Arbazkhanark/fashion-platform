@@ -1,9 +1,9 @@
-"use client"
+"use client";
 
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Search, Sparkles } from "lucide-react"
-import Link from "next/link"
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Search, Sparkles } from "lucide-react";
+import Link from "next/link";
 
 export default function HeroSection() {
   return (
@@ -14,11 +14,13 @@ export default function HeroSection() {
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center animate-fade-in">
           <h1 className="text-4xl md:text-6xl font-bold mb-6 text-balance">
-            Connect with Top <span className="text-primary">Fashion & Beauty</span> Experts
+            Connect with Top{" "}
+            <span className="text-primary">Fashion & Beauty</span> Experts
           </h1>
           <p className="text-lg md:text-xl text-muted-foreground mb-12 max-w-2xl mx-auto text-balance">
-            Discover talented designers, stylists, makeup artists, and beauty professionals. Book appointments, view
-            portfolios, and transform your style.
+            Discover talented designers, stylists, makeup artists, and beauty
+            professionals. Book appointments, view portfolios, and transform
+            your style.
           </p>
 
           {/* Search Bar */}
@@ -26,7 +28,10 @@ export default function HeroSection() {
             <div className="flex flex-col sm:flex-row gap-3">
               <div className="flex-1 relative">
                 <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
-                <Input placeholder="Search experts, services, or styles..." className="pl-12 h-12 text-base" />
+                <Input
+                  placeholder="Search experts, services, or styles..."
+                  className="pl-12 h-12 text-base"
+                />
               </div>
               <Button size="lg" className="gap-2">
                 Search
@@ -37,7 +42,11 @@ export default function HeroSection() {
           {/* Quick Actions */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link href="/style-assistant">
-              <Button variant="outline" size="lg" className="gap-2 w-full sm:w-auto bg-transparent">
+              <Button
+                variant="outline"
+                size="lg"
+                className="gap-2 w-full sm:w-auto bg-transparent"
+              >
                 <Sparkles className="w-4 h-4" />
                 Try AI Style Assistant
               </Button>
@@ -51,5 +60,5 @@ export default function HeroSection() {
         </div>
       </div>
     </section>
-  )
+  );
 }

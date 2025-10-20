@@ -1,19 +1,19 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import { Card } from "@/components/ui/card"
-import { Star, Filter } from "lucide-react"
+import { useState } from "react";
+import { Card } from "@/components/ui/card";
+import { Star, Filter } from "lucide-react";
 
 interface Review {
-  id: number
-  author: string
-  designer: string
-  rating: number
-  date: string
-  title: string
-  text: string
-  verified: boolean
-  helpful: number
+  id: number;
+  author: string;
+  designer: string;
+  rating: number;
+  date: string;
+  title: string;
+  text: string;
+  verified: boolean;
+  helpful: number;
 }
 
 const allReviews: Review[] = [
@@ -72,63 +72,86 @@ const allReviews: Review[] = [
     verified: true,
     helpful: 19,
   },
-]
+];
 
 export default function ReviewsPage() {
-  const [sortBy, setSortBy] = useState<"recent" | "helpful" | "rating">("recent")
-  const [filterRating, setFilterRating] = useState<number | null>(null)
+  const [sortBy, setSortBy] = useState<"recent" | "helpful" | "rating">(
+    "recent"
+  );
+  const [filterRating, setFilterRating] = useState<number | null>(null);
 
   const filteredReviews = allReviews
     .filter((review) => !filterRating || review.rating === filterRating)
     .sort((a, b) => {
-      if (sortBy === "recent") return new Date(b.date).getTime() - new Date(a.date).getTime()
-      if (sortBy === "helpful") return b.helpful - a.helpful
-      if (sortBy === "rating") return b.rating - a.rating
-      return 0
-    })
+      if (sortBy === "recent")
+        return new Date(b.date).getTime() - new Date(a.date).getTime();
+      if (sortBy === "helpful") return b.helpful - a.helpful;
+      if (sortBy === "rating") return b.rating - a.rating;
+      return 0;
+    });
 
-  const averageRating = (allReviews.reduce((sum, r) => sum + r.rating, 0) / allReviews.length).toFixed(1)
+  const averageRating = (
+    allReviews.reduce((sum, r) => sum + r.rating, 0) / allReviews.length
+  ).toFixed(1);
 
   return (
     <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
       {/* Header */}
       <div className="mb-12">
-        <h1 className="text-4xl font-bold text-foreground mb-4">Community Reviews</h1>
-        <p className="text-lg text-muted-foreground">See what clients say about our designers</p>
+        <h1 className="text-4xl font-bold text-foreground mb-4">
+          Community Reviews
+        </h1>
+        <p className="text-lg text-muted-foreground">
+          See what clients say about our designers
+        </p>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
         {/* Sidebar - Stats & Filters */}
         <div className="lg:col-span-1">
           <Card className="p-6 border border-border sticky top-20">
-            <h2 className="text-xl font-bold text-foreground mb-6">Rating Summary</h2>
+            <h2 className="text-xl font-bold text-foreground mb-6">
+              Rating Summary
+            </h2>
 
             {/* Overall Rating */}
             <div className="text-center mb-8">
-              <p className="text-5xl font-bold text-accent mb-2">{averageRating}</p>
+              <p className="text-5xl font-bold text-accent mb-2">
+                {averageRating}
+              </p>
               <div className="flex justify-center gap-1 mb-2">
                 {[...Array(5)].map((_, i) => (
                   <Star
                     key={i}
                     size={20}
                     className={
-                      i < Math.floor(Number.parseFloat(averageRating)) ? "fill-accent text-accent" : "text-muted"
+                      i < Math.floor(Number.parseFloat(averageRating))
+                        ? "fill-accent text-accent"
+                        : "text-muted"
                     }
                   />
                 ))}
               </div>
-              <p className="text-sm text-muted-foreground">Based on {allReviews.length} reviews</p>
+              <p className="text-sm text-muted-foreground">
+                Based on {allReviews.length} reviews
+              </p>
             </div>
 
             {/* Rating Filter */}
             <div className="space-y-2 mb-8">
-              <p className="text-sm font-semibold text-foreground mb-3">Filter by Rating</p>
+              <p className="text-sm font-semibold text-foreground mb-3">
+                Filter by Rating
+              </p>
               {[5, 4, 3, 2, 1].map((rating) => {
-                const count = allReviews.filter((r) => r.rating === rating).length
+                const count = allReviews.filter(
+                  (r) => r.rating === rating
+                ).length;
                 return (
                   <button
                     key={rating}
-                    onClick={() => setFilterRating(filterRating === rating ? null : rating)}
+                    onClick={() =>
+                      setFilterRating(filterRating === rating ? null : rating)
+                    }
                     className={`w-full text-left px-3 py-2 rounded text-sm transition ${
                       filterRating === rating
                         ? "bg-accent text-accent-foreground"
@@ -137,7 +160,7 @@ export default function ReviewsPage() {
                   >
                     <span className="font-semibold">{rating}★</span> ({count})
                   </button>
-                )
+                );
               })}
             </div>
 
@@ -152,7 +175,9 @@ export default function ReviewsPage() {
                   key={option}
                   onClick={() => setSortBy(option)}
                   className={`w-full text-left px-3 py-2 rounded text-sm transition capitalize ${
-                    sortBy === option ? "bg-accent text-accent-foreground" : "hover:bg-secondary text-foreground"
+                    sortBy === option
+                      ? "bg-accent text-accent-foreground"
+                      : "hover:bg-secondary text-foreground"
                   }`}
                 >
                   {option === "recent" && "Most Recent"}
@@ -168,7 +193,10 @@ export default function ReviewsPage() {
         <div className="lg:col-span-3 space-y-4">
           {filteredReviews.length > 0 ? (
             filteredReviews.map((review) => (
-              <Card key={review.id} className="p-6 border border-border hover:shadow-lg transition">
+              <Card
+                key={review.id}
+                className="p-6 border border-border hover:shadow-lg transition"
+              >
                 {/* Header */}
                 <div className="flex justify-between items-start mb-3">
                   <div>
@@ -187,17 +215,27 @@ export default function ReviewsPage() {
                       <Star
                         key={i}
                         size={16}
-                        className={i < review.rating ? "fill-accent text-accent" : "text-muted"}
+                        className={
+                          i < review.rating
+                            ? "fill-accent text-accent"
+                            : "text-muted"
+                        }
                       />
                     ))}
                   </div>
                 </div>
 
                 {/* Verified Badge */}
-                {review.verified && <p className="text-xs text-green-600 font-semibold mb-3">✓ Verified Purchase</p>}
+                {review.verified && (
+                  <p className="text-xs text-green-600 font-semibold mb-3">
+                    ✓ Verified Purchase
+                  </p>
+                )}
 
                 {/* Review Content */}
-                <h3 className="font-bold text-foreground mb-2">{review.title}</h3>
+                <h3 className="font-bold text-foreground mb-2">
+                  {review.title}
+                </h3>
                 <p className="text-muted-foreground mb-4">{review.text}</p>
 
                 {/* Helpful Button */}
@@ -205,17 +243,21 @@ export default function ReviewsPage() {
                   <button className="text-sm text-muted-foreground hover:text-accent transition">
                     👍 Helpful ({review.helpful})
                   </button>
-                  <button className="text-sm text-muted-foreground hover:text-accent transition">👎 Not Helpful</button>
+                  <button className="text-sm text-muted-foreground hover:text-accent transition">
+                    👎 Not Helpful
+                  </button>
                 </div>
               </Card>
             ))
           ) : (
             <Card className="p-12 text-center border border-border">
-              <p className="text-lg text-muted-foreground">No reviews found for the selected filters</p>
+              <p className="text-lg text-muted-foreground">
+                No reviews found for the selected filters
+              </p>
             </Card>
           )}
         </div>
       </div>
     </div>
-  )
+  );
 }

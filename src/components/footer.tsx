@@ -1,6 +1,6 @@
-"use client"
+"use client";
 
-import Link from "next/link"
+import Link from "next/link";
 import {
   Facebook,
   Instagram,
@@ -10,11 +10,11 @@ import {
   Phone,
   MapPin,
   Heart,
-} from "lucide-react"
-import { Button } from "@/components/ui/button"
+} from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 export default function Footer() {
-  const currentYear = new Date().getFullYear()
+  const currentYear = new Date().getFullYear();
 
   const footerLinks = {
     Platform: [
@@ -41,14 +41,14 @@ export default function Footer() {
       { label: "Cookie Policy", href: "#" },
       { label: "Accessibility", href: "#" },
     ],
-  }
+  };
 
   const socialLinks = [
     { icon: Facebook, href: "#", label: "Facebook" },
     { icon: Instagram, href: "#", label: "Instagram" },
     { icon: Twitter, href: "#", label: "Twitter" },
     { icon: Linkedin, href: "#", label: "LinkedIn" },
-  ]
+  ];
 
   return (
     <footer className="bg-secondary/50 border-t border-border">
@@ -59,7 +59,8 @@ export default function Footer() {
             <div>
               <h3 className="text-2xl font-bold mb-2">Stay Updated</h3>
               <p className="text-muted-foreground">
-                Get the latest trends, expert tips, and exclusive offers delivered to your inbox.
+                Get the latest trends, expert tips, and exclusive offers
+                delivered to your inbox.
               </p>
             </div>
             <div className="flex gap-2">
@@ -81,14 +82,17 @@ export default function Footer() {
           <div className="md:col-span-1">
             <Link href="/" className="flex items-center gap-2 mb-4 group">
               <div className="w-10 h-10 bg-gradient-to-br from-primary to-accent rounded-lg flex items-center justify-center">
-                <span className="text-primary-foreground font-bold text-xl">S</span>
+                <span className="text-primary-foreground font-bold text-xl">
+                  S
+                </span>
               </div>
               <span className="font-bold text-lg group-hover:text-primary transition-smooth">
                 StyleConnect
               </span>
             </Link>
             <p className="text-sm text-muted-foreground mb-6">
-              Connecting you with the best fashion designers and beauty experts for every occasion.
+              Connecting you with the best fashion designers and beauty experts
+              for every occasion.
             </p>
             <div className="flex gap-3">
               {socialLinks.map((social) => (
@@ -165,7 +169,8 @@ export default function Footer() {
         <div className="flex flex-col md:flex-row justify-between items-center pt-8 border-t border-border">
           <p className="text-sm text-muted-foreground text-center md:text-left">
             © {currentYear} StyleConnect. All rights reserved. Made with{" "}
-            <Heart className="w-4 h-4 inline text-primary fill-primary" /> for fashion lovers.
+            <Heart className="w-4 h-4 inline text-primary fill-primary" /> for
+            fashion lovers.
           </p>
           <div className="flex gap-6 mt-4 md:mt-0">
             <Link
@@ -190,5 +195,5 @@ export default function Footer() {
         </div>
       </div>
     </footer>
-  )
+  );
 }

@@ -86,43 +86,35 @@
 //   )
 // }
 
+"use client";
 
-
-
-
-
-
-
-
-
-"use client"
-
-import Link from "next/link"
-import { useRouter } from "next/navigation"
-import { Star, MapPin, Award, Zap } from "lucide-react"
-import { Card } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { Star, MapPin, Award, Zap } from "lucide-react";
+import { Card } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import Image from "next/image";
 
 interface Designer {
-  id: number
-  name: string
-  specialty: string
-  location: string
-  rating: number
-  reviews: number
-  experience: number
-  image: string
-  price: { min: number; max: number }
-  clients: number
-  freeTrial: boolean
+  id: number;
+  name: string;
+  specialty: string;
+  location: string;
+  rating: number;
+  reviews: number;
+  experience: number;
+  image: string;
+  price: { min: number; max: number };
+  clients: number;
+  freeTrial: boolean;
 }
 
 export default function DesignerCard({ designer }: { designer: Designer }) {
-  const router = useRouter()
+  const router = useRouter();
 
   const handleCardClick = () => {
-    router.push(`/designer/${designer.id}`)
-  }
+    router.push(`/designer/${designer.id}`);
+  };
 
   return (
     <Card
@@ -131,8 +123,10 @@ export default function DesignerCard({ designer }: { designer: Designer }) {
     >
       {/* Image Section */}
       <div className="relative overflow-hidden h-64 bg-muted">
-        <img
+        <Image
           src={designer.image || "/placeholder.svg"}
+          width={400}
+          height={256}
           alt={designer.name}
           className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
         />
@@ -155,7 +149,9 @@ export default function DesignerCard({ designer }: { designer: Designer }) {
         <h3 className="text-lg font-bold text-foreground mb-1 group-hover:text-accent transition">
           {designer.name}
         </h3>
-        <p className="text-sm text-accent font-semibold mb-3">{designer.specialty}</p>
+        <p className="text-sm text-accent font-semibold mb-3">
+          {designer.specialty}
+        </p>
 
         {/* Info Grid */}
         <div className="space-y-2 mb-4 text-sm text-muted-foreground">
@@ -179,9 +175,12 @@ export default function DesignerCard({ designer }: { designer: Designer }) {
         {/* Price & Clients */}
         <div className="mb-4">
           <p className="text-sm font-semibold text-foreground mb-1">
-            ₹{(designer.price.min / 1000).toFixed(0)}K - ₹{(designer.price.max / 1000).toFixed(0)}K
+            ₹{(designer.price.min / 1000).toFixed(0)}K - ₹
+            {(designer.price.max / 1000).toFixed(0)}K
           </p>
-          <p className="text-xs text-muted-foreground">{designer.clients}+ clients served</p>
+          <p className="text-xs text-muted-foreground">
+            {designer.clients}+ clients served
+          </p>
         </div>
 
         {/* CTA Button */}
@@ -194,5 +193,5 @@ export default function DesignerCard({ designer }: { designer: Designer }) {
         </Button>
       </div>
     </Card>
-  )
+  );
 }

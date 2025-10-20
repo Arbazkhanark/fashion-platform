@@ -1,8 +1,8 @@
-"use client"
+"use client";
 
-import Navigation from "@/components/navigation"
-import Footer from "@/components/footer"
-import ReviewsPage from "@/components/reviews-page"
+import Navigation from "@/components/navigation";
+import Footer from "@/components/footer";
+import ReviewsPage from "@/components/reviews-page";
 
 export default function ReviewsPageWrapper() {
   return (
@@ -11,5 +11,5 @@ export default function ReviewsPageWrapper() {
       <ReviewsPage />
       <Footer />
     </main>
-  )
+  );
 }

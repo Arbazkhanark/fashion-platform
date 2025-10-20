@@ -1,51 +1,56 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import { Calendar, Clock, Check } from "lucide-react"
-import { Card } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
+import { useState } from "react";
+import { Calendar, Clock, Check } from "lucide-react";
+import { Card } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
 
 interface Designer {
-  id: number
-  name: string
+  id: number;
+  name: string;
   availableSlots: Array<{
-    date: string
-    time: string
-    available: boolean
-  }>
+    date: string;
+    time: string;
+    available: boolean;
+  }>;
 }
 
-export default function AppointmentBooking({ designer }: { designer: Designer }) {
-  const [selectedSlot, setSelectedSlot] = useState<string | null>(null)
-  const [bookingStep, setBookingStep] = useState<"select" | "confirm" | "success">("select")
+export default function AppointmentBooking({
+  designer,
+}: {
+  designer: Designer;
+}) {
+  const [selectedSlot, setSelectedSlot] = useState<string | null>(null);
+  const [bookingStep, setBookingStep] = useState<
+    "select" | "confirm" | "success"
+  >("select");
 
   const handleBooking = () => {
     if (selectedSlot) {
-      setBookingStep("confirm")
+      setBookingStep("confirm");
     }
-  }
+  };
 
   const handleConfirm = () => {
-    setBookingStep("success")
+    setBookingStep("success");
     setTimeout(() => {
-      setBookingStep("select")
-      setSelectedSlot(null)
-    }, 3000)
-  }
+      setBookingStep("select");
+      setSelectedSlot(null);
+    }, 3000);
+  };
 
   // Group slots by date
-  const slotsByDate = designer.availableSlots.reduce(
-    (acc, slot) => {
-      if (!acc[slot.date]) acc[slot.date] = []
-      acc[slot.date].push(slot)
-      return acc
-    },
-    {} as Record<string, typeof designer.availableSlots>,
-  )
+  const slotsByDate = designer.availableSlots.reduce((acc, slot) => {
+    if (!acc[slot.date]) acc[slot.date] = [];
+    acc[slot.date].push(slot);
+    return acc;
+  }, {} as Record<string, typeof designer.availableSlots>);
 
   return (
     <Card className="p-6 border border-border">
-      <h3 className="text-xl font-bold text-foreground mb-6">Book an Appointment</h3>
+      <h3 className="text-xl font-bold text-foreground mb-6">
+        Book an Appointment
+      </h3>
 
       {bookingStep === "select" && (
         <div className="space-y-4">
@@ -62,24 +67,26 @@ export default function AppointmentBooking({ designer }: { designer: Designer })
                 </p>
                 <div className="grid grid-cols-2 gap-2">
                   {slots.map((slot) => {
-                    const slotId = `${slot.date}-${slot.time}`
+                    const slotId = `${slot.date}-${slot.time}`;
                     return (
                       <button
                         key={slotId}
-                        onClick={() => slot.available && setSelectedSlot(slotId)}
+                        onClick={() =>
+                          slot.available && setSelectedSlot(slotId)
+                        }
                         disabled={!slot.available}
                         className={`p-3 rounded-lg text-sm font-semibold transition flex items-center justify-center gap-2 ${
                           !slot.available
                             ? "bg-muted text-muted-foreground cursor-not-allowed opacity-50"
                             : selectedSlot === slotId
-                              ? "bg-accent text-accent-foreground"
-                              : "bg-secondary text-foreground hover:bg-secondary/80"
+                            ? "bg-accent text-accent-foreground"
+                            : "bg-secondary text-foreground hover:bg-secondary/80"
                         }`}
                       >
                         <Clock size={14} />
                         {slot.time}
                       </button>
-                    )
+                    );
                   })}
                 </div>
               </div>
@@ -104,20 +111,27 @@ export default function AppointmentBooking({ designer }: { designer: Designer })
           </div>
 
           <div className="space-y-2">
-            <p className="text-sm text-muted-foreground">Designer: {designer.name}</p>
-            <p className="text-sm text-muted-foreground">Duration: 1 hour consultation</p>
+            <p className="text-sm text-muted-foreground">
+              Designer: {designer.name}
+            </p>
+            <p className="text-sm text-muted-foreground">
+              Duration: 1 hour consultation
+            </p>
           </div>
 
           <div className="space-y-2">
-            <Button className="w-full bg-accent hover:bg-accent/90 text-accent-foreground" onClick={handleConfirm}>
+            <Button
+              className="w-full bg-accent hover:bg-accent/90 text-accent-foreground"
+              onClick={handleConfirm}
+            >
               Confirm Booking
             </Button>
             <Button
               variant="outline"
               className="w-full bg-transparent"
               onClick={() => {
-                setBookingStep("select")
-                setSelectedSlot(null)
+                setBookingStep("select");
+                setSelectedSlot(null);
               }}
             >
               Back
@@ -132,9 +146,11 @@ export default function AppointmentBooking({ designer }: { designer: Designer })
             <Check size={32} className="text-green-600" />
           </div>
           <p className="font-bold text-foreground mb-2">Booking Confirmed!</p>
-          <p className="text-sm text-muted-foreground">Check your email for confirmation details</p>
+          <p className="text-sm text-muted-foreground">
+            Check your email for confirmation details
+          </p>
         </div>
       )}
     </Card>
-  )
+  );
 }
