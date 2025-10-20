@@ -57,7 +57,7 @@ const realStories: Story[] = [
     date: "2024-10-15",
     occasion: "Wedding",
     likes: 234,
-    videoUrl: "https://example.com/video1",
+    videoUrl: "https://www.pexels.com/download/video/3129424/",
     tags: ["Bridal", "Traditional", "Custom Design"],
   },
   {
@@ -100,7 +100,7 @@ const realStories: Story[] = [
     date: "2024-11-05",
     occasion: "Destination Wedding",
     likes: 312,
-    videoUrl: "https://example.com/video2",
+    videoUrl: "https://www.pexels.com/download/video/3129424/",
     tags: ["Evening Wear", "Glamorous", "Custom Fit"],
   },
   {
@@ -143,7 +143,7 @@ const realStories: Story[] = [
     date: "2024-07-12",
     occasion: "Bridal Makeup",
     likes: 298,
-    videoUrl: "https://example.com/video3",
+    videoUrl: "https://www.pexels.com/download/video/3129424/",
     tags: ["Bridal Makeup", "Natural Glam", "Skincare"],
   },
   {
@@ -551,7 +551,7 @@ export default function RealStoriesPage() {
               {/* Story Content */}
               <div className="p-8">
                 <div className="flex items-center gap-4 mb-6">
-                  <img
+                  <Image
                     src={selectedStory.userImage}
                     alt={selectedStory.userName}
                     className="w-16 h-16 rounded-full object-cover"

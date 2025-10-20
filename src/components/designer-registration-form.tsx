@@ -536,7 +536,7 @@ export default function DesignerRegistrationForm() {
                 name="instagram"
                 value={formData.instagram}
                 onChange={handleInputChange}
-                placeholder="https://instagram.com/yourprofile"
+                placeholder="https://instagram.com"
                 className="bg-secondary border-border"
               />
             </div>
@@ -550,7 +550,7 @@ export default function DesignerRegistrationForm() {
                 name="facebook"
                 value={formData.facebook}
                 onChange={handleInputChange}
-                placeholder="https://facebook.com/yourprofile"
+                placeholder="https://facebook.com"
                 className="bg-secondary border-border"
               />
             </div>
@@ -564,7 +564,7 @@ export default function DesignerRegistrationForm() {
                 name="pinterest"
                 value={formData.pinterest}
                 onChange={handleInputChange}
-                placeholder="https://pinterest.com/yourprofile"
+                placeholder="https://pinterest.com"
                 className="bg-secondary border-border"
               />
             </div>

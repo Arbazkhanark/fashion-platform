@@ -47,9 +47,9 @@ const designerData = {
       "Bridal Consultation"
     ],
     socialLinks: {
-      instagram: "https://instagram.com/priyasharma",
-      facebook: "https://facebook.com/priyasharma",
-      pinterest: "https://pinterest.com/priyasharma",
+      instagram: "https://instagram.com",
+      facebook: "https://facebook.com",
+      pinterest: "https://pinterest.com",
     },
     freeTrial: true,
     portfolio: [

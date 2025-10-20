@@ -686,7 +686,7 @@ export default function ShareStoryPage() {
                           onChange={(e) =>
                             handleInputChange("videoUrl", e.target.value)
                           }
-                          placeholder="https://youtube.com/your-video"
+                          placeholder="https://www.pexels.com/download/video/3129424/"
                           className="bg-white/50 dark:bg-gray-700/50 backdrop-blur-sm"
                         />
                       </div>
