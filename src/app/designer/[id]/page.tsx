@@ -6,19 +6,17 @@ import DesignerPortfolio from "@/components/designer-portfolio";
 import AppointmentBooking from "@/components/appointment-booking";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import DesignerReviews from "@/components/designer-review";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import { 
   Star, 
   Users, 
   Award, 
-  Sparkles, 
-  Heart, 
+  Sparkles,  
   Share2, 
   MapPin, 
   Ribbon,
   BadgeCheck,
   TrendingUp,
-  Camera,
   Palette
 } from "lucide-react";
 

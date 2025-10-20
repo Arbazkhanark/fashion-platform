@@ -16,6 +16,7 @@ import {
   Plus,
 } from "lucide-react";
 import Link from "next/link";
+import Image from "next/image";
 
 interface Story {
   id: string;
@@ -325,8 +326,10 @@ export default function RealStoriesPage() {
                   <div className="relative h-64 overflow-hidden">
                     <div className="flex h-full">
                       <div className="flex-1 relative">
-                        <img
+                        <Image
                           src={story.beforeImage}
+                          width={400}
+                          height={256}
                           alt="Before"
                           className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                         />
@@ -335,8 +338,10 @@ export default function RealStoriesPage() {
                         </div>
                       </div>
                       <div className="flex-1 relative">
-                        <img
+                        <Image
                           src={story.afterImage}
+                          width={400}
+                          height={256}
                           alt="After"
                           className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                         />
@@ -357,8 +362,10 @@ export default function RealStoriesPage() {
                   <CardContent className="p-6">
                     {/* User Info */}
                     <div className="flex items-center gap-3 mb-4">
-                      <img
+                      <Image
                         src={story.userImage}
+                        width={48}
+                        height={48}
                         alt={story.userName}
                         className="w-12 h-12 rounded-full object-cover"
                       />
@@ -516,8 +523,10 @@ export default function RealStoriesPage() {
               {/* Before/After Images */}
               <div className="grid grid-cols-2 gap-0 h-96">
                 <div className="relative">
-                  <img
+                  <Image
                     src={selectedStory.beforeImage}
+                    width={600}
+                    height={384}
                     alt="Before"
                     className="w-full h-full object-cover"
                   />
@@ -526,8 +535,10 @@ export default function RealStoriesPage() {
                   </div>
                 </div>
                 <div className="relative">
-                  <img
+                  <Image
                     src={selectedStory.afterImage}
+                    width={600}
+                    height={384}
                     alt="After"
                     className="w-full h-full object-cover"
                   />

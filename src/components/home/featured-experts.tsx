@@ -10,6 +10,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { Star, MapPin, Award } from "lucide-react";
 import Link from "next/link";
+import Image from "next/image";
 
 const featuredExperts = [
   {
@@ -86,7 +87,7 @@ export default function FeaturedExperts() {
               >
                 <CardHeader className="pb-3">
                   <div className="relative mb-4 overflow-hidden rounded-lg h-40 bg-muted">
-                    <img
+                    <Image
                       src={expert.image || "/placeholder.svg"}
                       alt={expert.name}
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform"

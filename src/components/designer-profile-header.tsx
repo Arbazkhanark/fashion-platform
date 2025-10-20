@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { Star, MapPin, Award, Users, Heart, Share2, Calendar } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import Image from "next/image";
 
 interface Designer {
   id: number;
@@ -42,8 +43,10 @@ export default function DesignerProfileHeader({ designer }: DesignerProfileHeade
           >
             <div className="w-48 h-48 rounded-3xl bg-white/20 backdrop-blur-sm p-2 shadow-2xl">
               <div className="w-full h-full bg-gradient-to-br from-rose-200 to-amber-200 rounded-2xl flex items-center justify-center">
-                <img 
-                 src={'https://images.pexels.com/photos/160414/female-portrait-studio-attractive-160414.jpeg'}
+                <Image
+                  src={'https://images.pexels.com/photos/160414/female-portrait-studio-attractive-160414.jpeg'}
+                  alt={designer.name}
+                  className="w-44 h-44 rounded-2xl object-cover"
                  />
                 {/* <div className="text-center">
                   <div className="w-20 h-20 bg-white rounded-full flex items-center justify-center mx-auto mb-2 shadow-lg">
