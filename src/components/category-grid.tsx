@@ -297,7 +297,7 @@ export default function CategoryGrid() {
           <div className="inline-flex items-center gap-3 bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm border border-gray-200 dark:border-gray-700 rounded-2xl px-6 py-4 shadow-lg hover:shadow-xl transition-all duration-500 hover:scale-105 group">
             <Sparkles className="w-5 h-5 text-rose-500 animate-pulse" />
             <p className="text-gray-700 dark:text-gray-300 font-medium">
-              Can't find what you're looking for?{" "}
+              Can&apos;t find what you&apos;re looking for?{" "}
               <Link href="/designers" className="text-rose-600 dark:text-rose-400 hover:underline font-semibold group-hover:tracking-wide transition-all">
                 Browse all designers
               </Link>

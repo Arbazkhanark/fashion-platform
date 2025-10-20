@@ -534,7 +534,7 @@ export default function BecomeProviderPage() {
                     <div>
                         <p className="font-semibold text-green-900 dark:text-green-100">Profile Ready for Review</p>
                         <p className="text-sm text-green-800 dark:text-green-200 mt-2">
-                        Your profile will be reviewed by our team within 24-48 hours. You'll receive an email confirmation
+                        Your profile will be reviewed by our team within 24-48 hours. You&apos;ll receive an email confirmation
                         once approved.
                         </p>
                     </div>

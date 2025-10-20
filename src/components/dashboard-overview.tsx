@@ -17,7 +17,7 @@ export default function DashboardOverview() {
     <div className="space-y-8">
       <div>
         <h1 className="text-4xl font-bold text-foreground mb-2">Welcome back, John!</h1>
-        <p className="text-muted-foreground">Here's what's happening with your account</p>
+        <p className="text-muted-foreground">Here&apos;s what&apos;s happening with your account</p>
       </div>
 
       {/* Stats Grid */}

@@ -763,7 +763,7 @@ export default function StyleAssistantPage() {
                 <CardHeader className="pb-4">
                   <CardTitle className="flex items-center gap-2 text-gray-900 dark:text-white">
                     <Zap className="w-5 h-5 text-rose-500" />
-                    What's the occasion?
+                    What&apos;s the occasion?
                   </CardTitle>
                   <CardDescription className="text-gray-600 dark:text-gray-400">Select all that apply</CardDescription>
                 </CardHeader>
