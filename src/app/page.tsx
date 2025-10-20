@@ -11,14 +11,12 @@ import CTA from "@/components/cta";
 export default function Home() {
   return (
     <main className="min-h-screen bg-background">
-      <Navigation />
       <HeroSection />
       {/* <HeroSection /> */}
       <CategoryGrid />
       <FeaturedDesigners />
       <HowItWorks />
       <CTA />
-      <Footer />
     </main>
   );
 }

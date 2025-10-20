@@ -19,8 +19,6 @@ import {
   TrendingUp,
 } from "lucide-react";
 import Link from "next/link";
-import Navigation from "@/components/navigation";
-import Footer from "@/components/footer";
 import Image from "next/image";
 
 interface Booking {
@@ -187,7 +185,6 @@ export default function DashboardPage() {
 
   return (
     <>
-      <Navigation />
       <main className="min-h-screen bg-gradient-to-b from-white to-rose-50/30 dark:from-gray-900 dark:to-rose-900/20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
           {/* Header */}
@@ -873,7 +870,6 @@ export default function DashboardPage() {
           </Tabs>
         </div>
       </main>
-      <Footer />
 
       <style jsx>{`
         @keyframes glow-in {

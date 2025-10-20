@@ -1,8 +1,6 @@
 "use client";
 
 import { useState, useMemo, useEffect } from "react";
-import Navigation from "@/components/navigation";
-import Footer from "@/components/footer";
 import DesignerFilters from "@/components/designer-filters";
 import DesignerCard from "@/components/designer-card";
 import { Input } from "@/components/ui/input";
@@ -197,7 +195,6 @@ export default function DesignersPage() {
 
   return (
     <main className="min-h-screen bg-gradient-to-b from-white to-rose-50/30 dark:from-gray-900 dark:to-rose-900/20">
-      <Navigation />
 
       {/* Page Header */}
       <section className="py-16 bg-gradient-to-r from-rose-50/50 to-amber-50/30 dark:from-rose-900/10 dark:to-amber-900/5 border-b border-rose-100 dark:border-rose-800/30">
@@ -364,7 +361,6 @@ export default function DesignersPage() {
         </div>
       </div>
 
-      <Footer />
 
       <style jsx>{`
         @keyframes glow-in {

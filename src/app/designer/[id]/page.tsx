@@ -317,8 +317,6 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
-import Navigation from "@/components/navigation";
-import Footer from "@/components/footer";
 import DesignerProfileHeader from "@/components/designer-profile-header";
 import DesignerPortfolio from "@/components/designer-portfolio";
 import AppointmentBooking from "@/components/appointment-booking";
@@ -547,7 +545,6 @@ export default function DesignerProfilePage({
   if (!designerId) {
     return (
       <main className="min-h-screen bg-gradient-to-br from-rose-50 via-white to-amber-50 dark:from-gray-900 dark:via-gray-800 dark:to-rose-900">
-        <Navigation />
         <div className="max-w-7xl mx-auto px-4 py-20 text-center">
           <motion.div
             initial={{ opacity: 0 }}
@@ -559,7 +556,6 @@ export default function DesignerProfilePage({
             <div className="h-4 bg-rose-200 rounded w-1/3 mx-auto"></div>
           </motion.div>
         </div>
-        <Footer />
       </main>
     );
   }
@@ -569,7 +565,6 @@ export default function DesignerProfilePage({
   if (!designer) {
     return (
       <main className="min-h-screen bg-gradient-to-br from-rose-50 via-white to-amber-50 dark:from-gray-900 dark:via-gray-800 dark:to-rose-900">
-        <Navigation />
         <div className="max-w-7xl mx-auto px-4 py-20 text-center">
           <motion.h1 
             initial={{ opacity: 0, y: 20 }}
@@ -579,7 +574,6 @@ export default function DesignerProfilePage({
             Designer not found
           </motion.h1>
         </div>
-        <Footer />
       </main>
     );
   }
@@ -587,7 +581,6 @@ export default function DesignerProfilePage({
   return (
     <>
         <main className="min-h-screen bg-gradient-to-br from-rose-50 via-white to-amber-50 dark:from-gray-900 dark:via-gray-800 dark:to-rose-900">
-        <Navigation />
 
         {/* Enhanced Designer Header */}
         <motion.div
@@ -836,8 +829,6 @@ export default function DesignerProfilePage({
             </div>
             </div>
         </div>
-
-        <Footer />
         </main>
     </>
   );

@@ -23,8 +23,7 @@ import {
   Award,
 } from "lucide-react";
 import Link from "next/link";
-import Footer from "@/components/footer";
-import Navigation from "@/components/navigation";
+
 
 const categories = [
   {
@@ -243,7 +242,6 @@ export default function BecomeProviderPage() {
 
   return (
     <>
-      <Navigation />
       <main className="min-h-screen bg-gradient-to-b from-white to-rose-50/30 dark:from-gray-900 dark:to-rose-900/20">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
           {/* Header */}
@@ -816,7 +814,6 @@ export default function BecomeProviderPage() {
             </Card>
           )}
         </div>
-        <Footer />
 
         <style jsx>{`
           @keyframes glow-in {

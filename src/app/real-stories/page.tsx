@@ -470,8 +470,6 @@ import {
   ArrowRight,
   Plus,
 } from "lucide-react";
-import Navigation from "@/components/navigation";
-import Footer from "@/components/footer";
 import Link from "next/link";
 
 interface Story {
@@ -676,7 +674,6 @@ export default function RealStoriesPage() {
 
   return (
     <>
-      <Navigation />
       <main className="min-h-screen bg-gradient-to-b from-white to-rose-50/30 dark:from-gray-900 dark:to-rose-900/20">
         {/* Header Section */}
         <section className="py-20 bg-gradient-to-r from-rose-50/50 to-amber-50/30 dark:from-rose-900/10 dark:to-amber-900/5 border-b border-rose-100 dark:border-rose-800/30">
@@ -957,7 +954,6 @@ export default function RealStoriesPage() {
           </div>
         </section>
       </main>
-      <Footer />
 
       {/* Story Modal */}
       {selectedStory && (

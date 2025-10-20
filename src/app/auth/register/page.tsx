@@ -18,8 +18,6 @@ import {
   Star,
   Palette,
 } from "lucide-react";
-import Navigation from "@/components/navigation";
-import Footer from "@/components/footer";
 
 export default function RegisterPage() {
   const [step, setStep] = useState(1);
@@ -67,7 +65,6 @@ export default function RegisterPage() {
 
   return (
     <>
-      <Navigation />
       <main className="min-h-screen bg-gradient-to-br from-white via-rose-50/30 to-amber-50/20 dark:from-gray-900 dark:via-rose-900/10 dark:to-amber-900/5 flex items-center justify-center px-4 py-12 relative overflow-hidden">
         {/* Animated Background Elements */}
         <div className="absolute inset-0 -z-10 overflow-hidden">
@@ -445,7 +442,6 @@ export default function RegisterPage() {
           </div>
         </div>
       </main>
-      <Footer />
 
       <style jsx>{`
         @keyframes glow-in {

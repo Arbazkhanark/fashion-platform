@@ -15,8 +15,6 @@ import {
   CheckCircle,
   Image as ImageIcon,
 } from "lucide-react";
-import Navigation from "@/components/navigation";
-import Footer from "@/components/footer";
 import Link from "next/link";
 import Image from "next/image";
 
@@ -182,7 +180,6 @@ export default function ShareStoryPage() {
   if (isSubmitted) {
     return (
       <>
-        <Navigation />
         <main className="min-h-screen bg-gradient-to-b from-white to-rose-50/30 dark:from-gray-900 dark:to-rose-900/20 flex items-center justify-center">
           <div className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <div
@@ -220,14 +217,12 @@ export default function ShareStoryPage() {
             </div>
           </div>
         </main>
-        <Footer />
       </>
     );
   }
 
   return (
     <>
-      <Navigation />
       <main className="min-h-screen bg-gradient-to-b from-white to-rose-50/30 dark:from-gray-900 dark:to-rose-900/20">
         {/* Header */}
         <section className="py-16 bg-gradient-to-r from-rose-50/50 to-amber-50/30 dark:from-rose-900/10 dark:to-amber-900/5 border-b border-rose-100 dark:border-rose-800/30">
@@ -747,7 +742,6 @@ export default function ShareStoryPage() {
           </div>
         </section>
       </main>
-      <Footer />
 
       <style jsx>{`
         @keyframes glow-in {

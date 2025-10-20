@@ -24,8 +24,6 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import { mockExperts } from "@/lib/mock-data";
-import Footer from "@/components/footer";
-import Navigation from "@/components/navigation";
 
 interface StylePreferences {
   occasion: string[];
@@ -305,7 +303,6 @@ export default function StyleAssistantPage() {
 
   return (
     <>
-      <Navigation />
       <main className="min-h-screen bg-gradient-to-b from-white to-rose-50/30 dark:from-gray-900 dark:to-rose-900/20">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
           {/* Header */}
@@ -899,7 +896,6 @@ export default function StyleAssistantPage() {
           }
         `}</style>
       </main>
-      <Footer />
     </>
   );
 }
