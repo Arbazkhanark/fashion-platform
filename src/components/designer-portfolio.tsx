@@ -105,7 +105,7 @@ export default function DesignerPortfolio({
                 {/* Actual Image with Fallback */}
                 <div className="w-full h-full relative">
                   <Image
-                    src={item.image || "/api/placeholder/400/400"}
+                    src={item.image || "https://images.pexels.com/photos/4307688/pexels-photo-4307688.jpeg"}
                     alt={item.title}
                     fill
                     className="object-cover transition-transform duration-300 group-hover:scale-110"
@@ -199,7 +199,7 @@ export default function DesignerPortfolio({
                   <div className="flex-1 p-8 flex items-center justify-center bg-gradient-to-br from-rose-50 to-amber-50 dark:from-gray-800 dark:to-gray-900 min-h-[500px]">
                     <div className="relative w-full h-96 max-w-2xl">
                       <Image
-                        src={selectedImage.image || "/api/placeholder/600/400"}
+                        src={selectedImage.image || "https://images.pexels.com/photos/4307688/pexels-photo-4307688.jpeg"}
                         alt={selectedImage.title}
                         fill
                         className="object-contain rounded-2xl shadow-lg"
